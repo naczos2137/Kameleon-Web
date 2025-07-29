@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gra – Kameleon</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin: 20px; }
+    .hidden { display: none; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 5px 0; }
+    button { padding: 10px 20px; margin-top: 20px; font-size: 1.2em; }
+  </style>
+</head>
+<body>
+  <h1>Witaj, {{ name }}!</h1>
+  <div id="lobby">
+    <h2>Gracze w lobby:</h2>
+    <ul id="playerList"></ul>
+<!--    <button id="startBtn">Start gry</button>-->
+  </div>
+
+  <div id="game" class="hidden">
+    <h2 id="wordInfo">Czekaj...</h2>
+  </div>
+
+<script>
+  const name = "{{ name }}";
+  const playerList = document.getElementById('playerList');
+  const wordInfo = document.getElementById('wordInfo');
+  const gameDiv = document.getElementById('game');
+  const lobbyDiv = document.getElementById('lobby');
+
+  async function update() {
+    try {
+      const res = await fetch(`/status?name=${encodeURIComponent(name)}`);
+      const data = await res.json();
+
+      // Aktualizacja listy graczy
+      playerList.innerHTML = '';
+      data.players.forEach(player => {
+        const li = document.createElement('li');
+        li.textContent = player;
+        playerList.appendChild(li);
+      });
+
+      // Przełączanie widoków lobby/gra
+      if (data.started) {
+        lobbyDiv.classList.add('hidden');
+        gameDiv.classList.remove('hidden');
+        if (data.is_chameleon) {
+          wordInfo.textContent = "Jesteś KAMELEONEM! Udawaj, że znasz hasło!";
+        } else {
+          wordInfo.textContent = "Hasło: " + data.word;
+        }
+      } else {
+        lobbyDiv.classList.remove('hidden');
+        gameDiv.classList.add('hidden');
+        wordInfo.textContent = '';
+      }
+
+    } catch (e) {
+      console.error("Błąd połączenia z serwerem", e);
+    }
+  }
+
+  setInterval(update, 3000);
+  update();
+</script>
+
+</body>
+</html>

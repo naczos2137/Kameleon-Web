@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Admina</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+    button {
+      padding: 15px 30px;
+      margin: 15px;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    #status { margin-top: 30px; font-weight: bold; color: green; }
+  </style>
+</head>
+<body>
+  <h1>Panel Admina</h1>
+  <button onclick="startGame()">Start Rundy</button>
+  <button onclick="resetGame()">Reset Gry</button>
+  <div id="status"></div>
+
+  <script>
+    async function startGame() {
+      const res = await fetch('/start');
+      const txt = await res.text();
+      document.getElementById('status').textContent = 'Gra rozpoczęta: ' + txt;
+    }
+
+    async function resetGame() {
+      const res = await fetch('/reset');
+      const txt = await res.text();
+      document.getElementById('status').textContent = 'Zresetowano: ' + txt;
+    }
+  </script>
+</body>
+</html>
