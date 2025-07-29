@@ -2,6 +2,8 @@
 from flask import Flask, render_template, request, redirect, session, jsonify
 import random
 
+CHAMELEON_AMOUNT = 1
+
 app = Flask(__name__)
 app.secret_key = 'tajny_klucz'
 
@@ -52,10 +54,10 @@ def status():
 @app.route('/start')
 def start():
     global chameleon, game_started
-    if len(players) < 3:
-        return "Potrzeba co najmniej 3 graczy", 400
+    if len(players) < CHAMELEON_AMOUNT + 2:
+        return f"Potrzeba co najmniej {CHAMELEON_AMOUNT + 2} graczy", 400
     if not game_started:
-        while len(set(chameleon)) < 2:
+        while len(set(chameleon)) < CHAMELEON_AMOUNT:
             chameleon.append(random.choice(players))
         game_started = True
     return f"Gracze {players}"
