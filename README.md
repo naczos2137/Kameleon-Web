@@ -26,5 +26,5 @@ By zagrać potrzeba:
 - Można dołączać w trakcje gry (nie będzie się wtedy kameleonem)
 - Jeśli port 5000 jest zablokowany/już używany należy w `main.py` pod koniec w ```app.run(host='0.0.0.0', port=5000, debug=False)``` zmienić `5000` na inną liczbę (może być 5001 etc.)
 - Jeśli 2 osoby wejdą z tym samym nickiem to będą liczone jako 1 gracz (tzn będą widzieć na telefonie to samo)
-- Jeśli widzisz, że pojawiają ci się rzeczy na ekranie z opóźnieniem do 3 sekund to jest to zamierzony efekt. By gra działała nawet przy słabym ruterze z wieloma graczami na raz nie tworzy stałych połączeń WebSocket tylko każdy z graczy co 3 sekundy prosi serwer o aktualny stan gry. Opóźnienie do 3 sekund realnie nie wpływa w żaden niegatywny sposób na rozgrywkę.
+- Jeśli widzisz, że pojawiają ci się rzeczy na ekranie z opóźnieniem do 3 sekund to jest to zamierzony efekt. By gra działała nawet przy słabym ruterze z wieloma graczami na raz nie tworzy stałych połączeń WebSocket tylko każdy z graczy co 3 sekundy prosi serwer o aktualny stan gry (działa trochę jak UTP). Opóźnienie do 3 sekund realnie nie wpływa w żaden niegatywny sposób na rozgrywkę.
   
