@@ -1,3 +1,5 @@
+const checkbox = document.getElementById('wordsFromInput');
+
 async function startGame() {
     const res = await fetch('/start');
     const txt = await res.text();
@@ -9,3 +11,11 @@ async function resetGame() {
     const txt = await res.text();
     document.getElementById('status').textContent = 'Zresetowano: ' + txt;
 }
+
+checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+        console.log("Włączone");
+    } else {
+        console.log("Wyłączone");
+    }
+});
