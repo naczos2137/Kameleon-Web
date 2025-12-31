@@ -1,76 +1,112 @@
-/* style.css */
+/* --- Reset podstawowych marginesów i paddingu --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 48px;
-    background: #f2f4f8;
-    margin: 20px;
-    padding: 0;
-    color: #333;
-}
-
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 1.5rem;
-    background: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 12px;
-    margin-top: 3rem;
-}
-
-h1, h2, h3 {
+    background-color: #f5f6fa;
+    color: #2f3640;
     text-align: center;
-    color: #2c3e50;
-}
-
-form {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-top: 1.5rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 50px 20px;
 }
 
-input[type="text"] {
-    padding: 0.75rem;
-    font-size: 3rem;
-    border: 1px solid #ccc;
+/* --- Nagłówki --- */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #1e272e;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #2f3640;
+}
+
+/* --- Formularze, inputy i przyciski --- */
+input[type="text"], button {
+    font-size: 1.1em;
+    padding: 12px 20px;
+    margin: 10px 0;
     border-radius: 8px;
+    border: 1px solid #dcdde1;
+    outline: none;
+    transition: all 0.2s ease;
 }
 
-button, a {
-    background-color: #3498db;
+input[type="text"]:focus {
+    border-color: #00a8ff;
+    box-shadow: 0 0 5px rgba(0,168,255,0.3);
+}
+
+button {
+    background-color: #00a8ff;
     color: white;
-    padding: 0.75rem;
     border: none;
-    border-radius: 8px;
-    font-size: 4rem;
     cursor: pointer;
-    transition: background-color 0.2s ease;
 }
 
 button:hover {
-    background-color: #2980b9;
+    background-color: #0097e6;
 }
 
+/* --- Listy graczy --- */
 ul {
     list-style: none;
-    padding-left: 25%;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 300px;
 }
 
-ul li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #eee;
+li {
+    background-color: #dcdde1;
+    margin: 5px 0;
+    padding: 10px 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-@media (max-width: 600px) {
-    .container {
-        margin-top: 1rem;
-        padding: 1rem;
-    }
-
-    input[type="text"], button {
-        font-size: 1rem;
-        padding: 0.75rem;
-    }
+/* --- Ukrywanie elementów --- */
+.hidden {
+    display: none;
 }
+
+/* --- Lobby i game div --- */
+#lobby, #game {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* --- Panel Admina --- */
+#status {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+/* --- Przyciski admina --- */
+#admin-buttons button {
+    padding: 12px 25px;
+    margin: 10px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+#admin-buttons button:hover {
+    opacity: 0.9;
+}
+

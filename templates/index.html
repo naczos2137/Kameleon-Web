@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kameleon – Dołącz</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 80px; }
-    input, button { font-size: 1.2em; padding: 10px; margin: 10px; }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <h1>Kameleon 🦎</h1>
@@ -17,19 +14,6 @@
     <button type="submit">Dołącz do gry</button>
   </form>
 
-  <script>
-    const nameInput = document.getElementById('name');
-    const savedName = localStorage.getItem('kameleonName');
-    if (savedName) nameInput.value = savedName;
-
-    document.getElementById('joinForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = nameInput.value.trim();
-      if (name) {
-        localStorage.setItem('kameleonName', name);
-        window.location.href = `/game?name=${encodeURIComponent(name)}`;
-      }
-    });
-  </script>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>
