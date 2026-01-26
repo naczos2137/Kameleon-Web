@@ -1,13 +1,17 @@
 const checkbox = document.getElementById('wordsFromInput');
 
 async function startGame() {
-    const res = await fetch('/start');
+    const res = await fetch('/start', {
+        method: 'POST'
+    });
     const txt = await res.text();
     document.getElementById('status').textContent = 'Gra rozpoczęta: ' + txt;
 }
 
 async function resetGame() {
-    const res = await fetch('/reset');
+    const res = await fetch('/reset', {
+        method: 'POST'
+    });
     const txt = await res.text();
     document.getElementById('status').textContent = 'Zresetowano: ' + txt;
 }
