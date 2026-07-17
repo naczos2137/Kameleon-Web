@@ -1,19 +1,10 @@
 from flask import Flask, render_template, request, redirect, session, jsonify
 import random
 
-CHAMELEON_AMOUNT = 1
+from lobby import Lobby
+import wordsets
 
 app = Flask(__name__)
-app.secret_key = 'tajny_klucz'
-
-players = []
-chameleon = []
-last_chameleon = []
-words_file_name = "hasla.txt"
-with open(words_file_name, 'r', encoding='utf-8') as f:
-    hasla = f.read().splitlines()
-current_word = random.choice(hasla)
-game_started = False
 
 @app.route('/')
 def index():
@@ -21,66 +12,85 @@ def index():
 
 @app.route('/game')
 def game():
+    lobby = request.args.get('lobby')
     name = request.args.get('name')
+    if not lobby:
+        return redirect('/')
     if not name:
         return redirect('/')
+    lobby = int(lobby)
 
-    if name not in players:
-        players.append(name)
-
-    return render_template('game.html', name=name)
+    return render_template('game.html', lobby=lobby, name=name)
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    lobby = request.args.get('lobby')
+    if not lobby:
+        return jsonify({'error': 'No lobby id'}), 400
+    lobby = int(lobby)
+    return render_template('admin.html', lobby=lobby)
 
 @app.get('/status')
 def status():
+    lobby = request.args.get('lobby')
     name = request.args.get('name')
+    if not lobby:
+        return jsonify({'error': 'No lobby id'}), 400
     if not name:
-        return jsonify({'error': 'Brak nazwy gracza'}), 400
-    if name not in players:
-        players.append(name)
-
-    is_chameleon = (name in chameleon)
-    return jsonify({
-        'players': players,
-        'started': game_started,
-        'is_chameleon': is_chameleon,
-        'word': None if is_chameleon else current_word
-    })
+        return jsonify({'error': 'No player name'}), 400
+    lobby = int(lobby)
+    return jsonify(Lobby.get_status(lobby, name))
 
 @app.post('/start')
 def start():
-    global chameleon, game_started, last_chameleon
-    print(last_chameleon)
-    if len(players) < CHAMELEON_AMOUNT + 2:
-        return f"Potrzeba co najmniej {CHAMELEON_AMOUNT + 2} graczy", 400
-    if not game_started:
-        real_CHAMELEON_AMOUNT = CHAMELEON_AMOUNT
-        if random.random() < 0.1:
-            real_CHAMELEON_AMOUNT = random.randint(1, len(players) - max(1, len(last_chameleon)))
-        while len(set(chameleon)) < real_CHAMELEON_AMOUNT:
-            new_chameleon = random.choice(players)
-            if new_chameleon in last_chameleon:
-                continue
-            chameleon.append(new_chameleon)
-        last_chameleon = list(chameleon)
-        game_started = True
-    return f"Gracze {players}"
+    lobby = request.args.get('lobby')
+    if not lobby:
+        return jsonify({'error': 'No lobby id'}), 400
+    lobby = int(lobby)
+    
+    if Lobby.start(lobby):
+        return jsonify(), 200
+    else:
+        return jsonify({'error': 'Minimum 3 players'}), 400
 
 @app.post('/reset')
 def reset():
-    global players, chameleon, current_word, game_started, last_chameleon
-    players = []
-    chameleon = []
-    current_word = random.choice(hasla)
-    game_started = False
-    return f"Zresetowano {last_chameleon}"
+    lobby = request.args.get('lobby')
+    if not lobby:
+        return jsonify({'error': 'No lobby id'}), 400
+    lobby = int(lobby)
+    
+    return Lobby.reset(lobby)
 
-@app.post('/settings')
-def settings():
-    pass
+@app.post('/set_category')
+def set_category():
+    lobby = request.args.get('lobby')
+    category = request.args.get('category')
+    set_to = request.args.get('set_to')
+    if not lobby:
+        return jsonify({'error': 'No lobby id'}), 400
+    lobby = int(lobby)
+    if not category:
+        return jsonify({'error': 'No category'}), 400
+    if not set_to:
+        return jsonify({'error': 'No set_to'}), 400
+    set_to = str(set_to).lower() == "true"
+
+    Lobby.set_category(lobby, category, set_to)
+
+    return jsonify(), 200 
+
+@app.post('/get_categories')
+def get_categories():
+    lobby = request.args.get('lobby')
+    if not lobby:
+        return jsonify({'error': 'No lobby id'}), 400
+    lobby = int(lobby)
+
+    return jsonify({
+        'active': Lobby.get_categories(lobby),
+        'all': list(wordsets.WORD_SETS.keys())
+        }), 200 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='127.0.0.1', port=5001, debug=False)

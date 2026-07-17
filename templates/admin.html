@@ -1,23 +1,57 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Panel Admina</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Lobby</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
 <body>
-  <h1>Panel Admina</h1>
-  <div id="admin-buttons">
-    <button onclick="startGame()">Start Rundy</button>
-    <button onclick="resetGame()">Reset Gry</button>
-  </div>
-  <label>
-      <input type="checkbox" id="wordsFromInput">
-      Włącz / Wyłącz
-    </label>
-  <div id="status"></div>
 
-  <script src="{{ url_for('static', filename='admin.js') }}"></script>
+<div class="container">
+
+    <div class="card">
+
+        <h1>Panel Admina</h1>
+
+        <div class="lobby-id">
+            Lobby: {{ lobby }}
+        </div>
+
+        <div class="buttons">
+
+            <button id="startBtn" class="start-btn">
+                Start Gry
+            </button>
+
+            <button id="resetBtn" class="reset-btn">
+                Reset Gry
+            </button>
+
+        </div>
+
+        <div class="categories-section">
+
+            <h2>Kategorie</h2>
+
+            <div id="categoriesList" class="categories-list">
+                Ładowanie...
+            </div>
+
+        </div>
+
+        <div id="message"></div>
+
+    </div>
+
+</div>
+
+<script>
+    const LOBBY_ID = "{{ lobby }}";
+</script>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
 </body>
 </html>

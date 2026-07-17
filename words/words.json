@@ -1,0 +1,34 @@
+[
+    {
+        "name": "PL - Ogólne",
+        "file": "pl_general.txt"
+    },
+    {
+        "name": "PL - Gry",
+        "file": "pl_games.txt"
+    },
+    {
+        "name": "PL - Społeczeństwo",
+        "file": "pl_sociecity.txt"
+    },
+    {
+        "name": "PL - Historia",
+        "file": "pl_history.txt"
+    },
+    {
+        "name": "PL - Geografia",
+        "file": "pl_geography.txt"
+    },
+    {
+        "name": "PL - Muzyka",
+        "file": "pl_music.txt"
+    },
+    {
+        "name": "PL - 18+",
+        "file": "pl_nsfw.txt"
+    },
+    {
+        "name": "PL - SCP",
+        "file": "pl_scp.txt"
+    }
+]

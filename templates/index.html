@@ -1,19 +1,53 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kameleon – Dołącz</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kameleon</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body>
-  <h1>Kameleon 🦎</h1>
-  <form id="joinForm">
-    <input type="text" id="name" placeholder="Wpisz imię" required>
-    <br>
-    <button type="submit">Dołącz do gry</button>
-  </form>
 
-  <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <div class="container">
+        <div class="card">
+            <h1>Kameleon</h1>
+            <p class="subtitle">Dołącz do lobby lub utwórz nowe.</p>
+
+            <div class="input-group">
+                <label for="nickname">Nick</label>
+                <input
+                    type="text"
+                    id="nickname"
+                    maxlength="30"
+                    placeholder="Wpisz swój nick">
+            </div>
+
+            <div class="input-group">
+                <label for="lobby">Lobby ID</label>
+                <input
+                    type="text"
+                    id="lobby"
+                    maxlength="6"
+                    inputmode="numeric"
+                    placeholder="123456">
+            </div>
+
+            <div id="error" class="error"></div>
+
+            <div class="buttons">
+                <button id="joinBtn" class="primary-btn">
+                    Join Lobby
+                </button>
+
+                <button id="createBtn" class="secondary-btn">
+                    Create Lobby
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
 </body>
 </html>

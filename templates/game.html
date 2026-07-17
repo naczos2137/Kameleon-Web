@@ -1,22 +1,62 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kameleon</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kameleon</title>
+
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
 </head>
 <body>
-  <h1>Witaj, {{ name }}!</h1>
-  <div id="lobby">
-    <h2>Gracze w lobby:</h2>
-    <ul id="playerList"></ul>
-  </div>
 
-  <div id="game" class="hidden">
-    <h2 id="wordInfo">Czekaj...</h2>
-  </div>
+<a href="/admin?lobby={{ lobby }}" class="admin-btn">
+    Admin
+</a>
 
-  <script src="{{ url_for('static', filename='game.js') }}"></script>
+<div class="container">
+
+    <div id="lobbyScreen" class="card">
+
+        <h1>🦎 Kameleon</h1>
+
+        <div class="lobby-section">
+            <span class="lobby-label">Kod lobby</span>
+
+            <div class="lobby-code-wrapper">
+                <div class="lobby-code">{{ lobby }}</div>
+
+                <button id="copyLobbyBtn" class="copy-btn">
+                    Kopiuj
+                </button>
+            </div>
+        </div>
+
+        <p class="subtitle">
+            Oczekiwanie na rozpoczęcie gry...
+        </p>
+
+        <h2>Gracze</h2>
+
+        <ul id="playerList" class="player-list"></ul>
+
+    </div>
+
+    <div id="gameScreen" class="card hidden">
+
+        <h1>Gra rozpoczęta</h1>
+
+        <div id="gameContent"></div>
+
+    </div>
+
+</div>
+
+<script>
+    const LOBBY_ID = "{{ lobby }}";
+    const PLAYER_NAME = "{{ name }}";
+</script>
+
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+
 </body>
 </html>
