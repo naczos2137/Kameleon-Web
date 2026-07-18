@@ -19,6 +19,7 @@ class Lobby:
         self.chameleon: str = ''
         self.last_chameleon: str = ''
         self.current_word = ''
+        self.current_category = ''
         self.game_started = False
         self.categories: set[str] = set()
 
@@ -35,7 +36,8 @@ class Lobby:
         'players': get_lobby(lobby_id).players,
         'started': get_lobby(lobby_id).game_started,
         'is_chameleon': is_chameleon,
-        'word': None if is_chameleon else get_lobby(lobby_id).current_word
+        'word': None if is_chameleon else get_lobby(lobby_id).current_word,
+        'category': get_lobby(lobby_id).current_category
     }
 
     @staticmethod
@@ -47,8 +49,9 @@ class Lobby:
             print(get_lobby(lobby_id).players)
             return False
         
-        get_lobby(lobby_id).current_word = random.choice([word for wordset_name, wordset in wordsets.WORD_SETS.items() for word in wordset if wordset_name in get_lobby(lobby_id).categories])
-        
+        get_lobby(lobby_id).current_category = random.choice(list(get_lobby(lobby_id).categories))
+        get_lobby(lobby_id).current_word = random.choice(wordsets.WORD_SETS[get_lobby(lobby_id).current_category])
+
         get_lobby(lobby_id).chameleon = random.choice([player for player in get_lobby(lobby_id).players if player != get_lobby(lobby_id).last_chameleon])
         get_lobby(lobby_id).last_chameleon = get_lobby(lobby_id).chameleon
 

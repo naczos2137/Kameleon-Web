@@ -189,3 +189,22 @@ h2 {
         padding: 8px 12px;
     }
 }
+
+.category-box {
+    margin-bottom: 20px;
+    text-align: center;
+
+    background: #374151;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.category-label {
+    color: #9ca3af;
+    margin-bottom: 6px;
+}
+
+#categoryText {
+    font-size: 1.2rem;
+    font-weight: bold;
+}

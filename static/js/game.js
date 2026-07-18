@@ -6,6 +6,9 @@ const gameContent = document.getElementById("gameContent");
 
 const copyLobbyBtn = document.getElementById("copyLobbyBtn");
 
+const categoryBox = document.getElementById("categoryBox");
+const categoryText = document.getElementById("categoryText");
+
 copyLobbyBtn.addEventListener("click", async () => {
     try {
         await navigator.clipboard.writeText(LOBBY_ID);
@@ -95,6 +98,8 @@ function renderGame(data) {
             </div>
         `;
     }
+
+    categoryText.textContent = data.category;
 }
 
 loadStatus();
