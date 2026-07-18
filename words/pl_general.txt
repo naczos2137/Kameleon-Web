@@ -471,3 +471,42 @@ zbroja
 pierścień
 naszyjnik
 bransoletka
+jajecznica
+bomba
+policja
+straż miejsca
+żółty
+zielony
+niebieski
+czerwony
+czarny
+biały
+łoś
+łosoś
+kebab
+narty
+deszcz
+grad
+podatek
+ćma
+komar
+palenie śmieciami
+ogórki kiszone
+pomidorowa
+tesla
+mocz
+siłownia
+kreatyna
+białko
+jagodzianka
+tartak
+tarka
+trytytka
+WD-40
+kasyno
+kefir
+kebab giga buła ostry sos mięso mieszane
+hamburger
+naczos
+krzesło elektryczne
+egzekucja
