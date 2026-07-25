@@ -4,6 +4,7 @@ Rebelia Chaosu
 Kościół Zepsutego Boga
 Ręka Węża
 Globalna Koalicja Okultystyczna
+Dr. Bright
 SCP Secret Laboratory
 SCP Containment Breach
 SPC
@@ -17,6 +18,9 @@ Euclid
 Site-02
 Tesla Gate
 C.A.S.S.I.E.
+Alpha Warhead
+Gate A
+Gate B
 Light Containment Zone
 Heavy Containment Zone
 Surface Zone
